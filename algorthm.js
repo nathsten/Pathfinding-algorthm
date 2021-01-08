@@ -30,16 +30,9 @@ const findPath = b => {
         // Down
         if(b[currentNode[0]+1][currentNode[1]] === 0){
             if(currentNode[0] >= end[0] && b[currentNode[0]][currentNode[1]+1] === 0){
-                if(currentNode[1] >= end[1] && b[currentNode[0]-1][currentNode[1]] === 0){
-                    b[currentNode[0]-1][currentNode[1]] = 4;
-                    currentNode = [currentNode[0]-1, currentNode[1]];
-                    drawBoard(b);
-                }
-                else{
-                    b[currentNode[0]][currentNode[1]+1] = 4;
-                    currentNode = [currentNode[0], currentNode[1]+1];
-                    drawBoard(b);
-                }
+                b[currentNode[0]][currentNode[1]+1] = 4;
+                currentNode = [currentNode[0], currentNode[1]+1];
+                drawBoard(b);
             }
             else{
                 b[currentNode[0]+1][currentNode[1]] = 4;
@@ -162,19 +155,6 @@ const findPath = b => {
                 drawBoard(b);
             }
         }
-        // Up
-        else if(b[currentNode[0]-1][currentNode[1]] === 0){
-            if(currentNode[0] <= end[0] && b[currentNode[0]][currentNode[1]-1] === 0){
-                b[currentNode[0]][currentNode[1]-1] = 4;
-                currentNode = [currentNode[0], currentNode[1]-1];
-                drawBoard(b);
-            }
-            else{
-                b[currentNode[0]-1][currentNode[1]] = 4;
-                currentNode = [currentNode[0]-1, currentNode[1]];
-                drawBoard(b);
-            }
-        }
         // Right
         else if(b[currentNode[0]][currentNode[1]+1] === 0){
             if(currentNode[1] >= end[1] && b[currentNode[0]+1][currentNode[1]] === 0){
@@ -185,6 +165,19 @@ const findPath = b => {
             else{
                 b[currentNode[0]][currentNode[1]+1] = 4;
                 currentNode = [currentNode[0], currentNode[1]+1];
+                drawBoard(b);
+            }
+        }
+        // Up
+        else if(b[currentNode[0]-1][currentNode[1]] === 0){
+            if(currentNode[0] <= end[0] && b[currentNode[0]][currentNode[1]-1] === 0){
+                b[currentNode[0]][currentNode[1]-1] = 4;
+                currentNode = [currentNode[0], currentNode[1]-1];
+                drawBoard(b);
+            }
+            else{
+                b[currentNode[0]-1][currentNode[1]] = 4;
+                currentNode = [currentNode[0]-1, currentNode[1]];
                 drawBoard(b);
             }
         }
@@ -263,20 +256,20 @@ const findPath = b => {
                             || b[currentNode[0]][currentNode[1]-1] === 2){
                                 pathFound = true;
                         }
+                        if(pathFound === true){
+                            break;
+                        }
                         if(currentNode[0] >= end[0] && currentNode[1] >= end[1]){
                             downDown();
                         }
                         else if(currentNode[0] <= end[0] && currentNode[1] >= end[1]){
                             upDown();
                         }
-                        else if(currentNode[0] >= end[0] && currentNode[1] <= end[1]){
+                        else if(currentNode[0] > end[0] && currentNode[1] < end[1]){
                             downUp();
                         }
                         else{
                             UpUp();
-                        }
-                        if(pathFound === true){
-                            break;
                         }
                     }
                     break;
@@ -290,6 +283,9 @@ const findPath = b => {
                             || b[currentNode[0]][currentNode[1]-1] === 2){
                                 pathFound = true;
                         }
+                        if(pathFound === true){
+                            break;
+                        }
                         if(currentNode[0] >= end[0] && currentNode[1] <= end[1]){
                             downDown();
                         }
@@ -301,9 +297,6 @@ const findPath = b => {
                         }
                         else{
                             upDown();
-                        }
-                        if(pathFound === true){
-                            break;
                         }
                     }
                     break;
@@ -322,6 +315,9 @@ const findPath = b => {
                             || b[currentNode[0]][currentNode[1]-1] === 2){
                                 pathFound = true;
                         }
+                        if(pathFound === true){
+                            break;
+                        }
                         if(currentNode[0] >= end[0] && currentNode[1] >= end[1]){
                             downDown();
                         }
@@ -333,9 +329,6 @@ const findPath = b => {
                         }
                         else{
                             downUp();
-                        }
-                        if(pathFound === true){
-                            break;
                         }
                     }
                     break;
@@ -349,6 +342,9 @@ const findPath = b => {
                             || b[currentNode[0]][currentNode[1]-1] === 2){
                                 pathFound = true;
                         }
+                        if(pathFound === true){
+                            break;
+                        }
                         if(currentNode[0] <= end[0] && currentNode[1] <= end[1]){
                             UpUp();
                         }
@@ -360,9 +356,6 @@ const findPath = b => {
                         }
                         else{
                             downDown();
-                        }
-                        if(pathFound === true){
-                            break;
                         }
                     }
                     break;
