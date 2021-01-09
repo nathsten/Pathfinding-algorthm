@@ -1,5 +1,8 @@
 ## My first Pathfinding algorithm:
 
+### Try it out on:
+https://pathfinding-algorthm.netlify.app/
+
 This is my first ever pathfinding algorithm and is just made for fun.
 
 It has a lot of bugs and you can 100% break it, but it does find the path in
