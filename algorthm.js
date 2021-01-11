@@ -1,4 +1,5 @@
 // WARNING: THE CODE IS NOT PRETTY!!
+// @ts-check
 const startBtn = $("start");
 
 /**
@@ -17,6 +18,8 @@ const findDirection = (e, s) => {
     }
 }
 
+// If failed, mark current node as useless, then clearPath(board), then start over. 
+
 /**
  * @param {number[][]} b
  */
@@ -27,7 +30,6 @@ const findPath = b => {
     boardDiv.childNodes.forEach(a => a.className.includes("endPoint") ? a.id.split(" ").forEach(id => end.push(Number(id))):0);
     let pathFound = false;
     let failed = false;
-    let checkFail;
     let currentNode = [start[0], start[1]];
 
     const UpUp = () => {
@@ -356,16 +358,18 @@ const findPath = b => {
                         }
 
                         try{
-                            if((b[currentNode[0]-1][currentNode[1]] === 1 || b[currentNode[0]-1][currentNode[1]] === 4)
-                                && (b[currentNode[0]+1][currentNode[1]] === 1 || b[currentNode[0]+1][currentNode[1]] === 4)
-                                && (b[currentNode[0]][currentNode[1]+1] === 1 || b[currentNode[0]][currentNode[1]+1] === 4)
-                                && (b[currentNode[0]][currentNode[1]-1] === 1 || b[currentNode[0]][currentNode[1]-1] === 4)){
+                            if((b[currentNode[0]-1][currentNode[1]] === 1 || b[currentNode[0]-1][currentNode[1]] === 4 || b[currentNode[0]-1][currentNode[1]] === 5 || (b[currentNode[0]-1][currentNode[1]] === 3 && b[currentNode[0]+1][currentNode[1]] === 5))
+                                && (b[currentNode[0]+1][currentNode[1]] === 1 || b[currentNode[0]+1][currentNode[1]] === 4  || b[currentNode[0]+1][currentNode[1]] === 5 || (b[currentNode[0]+1][currentNode[1]] === 3 && b[currentNode[0]-1][currentNode[1]] === 5))
+                                && (b[currentNode[0]][currentNode[1]+1] === 1 || b[currentNode[0]][currentNode[1]+1] === 4  || b[currentNode[0]][currentNode[1]+1] === 5 || (b[currentNode[0]][currentNode[1]+1] === 3 && b[currentNode[0]][currentNode[1]-1] === 5))
+                                && (b[currentNode[0]][currentNode[1]-1] === 1 || b[currentNode[0]][currentNode[1]-1] === 4) || b[currentNode[0]][currentNode[1]-1] === 5 || (b[currentNode[0]][currentNode[1]-1] === 3 && b[currentNode[0]][currentNode[1]+1] === 5)){
                                     failed = true;
                             }
                         } catch(e){};
                         if(failed === true){
-                            alert("Failed");
-                            break;
+                            clearPath(b);
+                            b[currentNode[0]][currentNode[1]] = 5;
+                            currentNode = [start[0], start[1]];
+                            failed = false;
                         }
 
                         if(currentNode[0] >= end[0] && currentNode[1] >= end[1]){
@@ -399,16 +403,18 @@ const findPath = b => {
                         }
 
                         try{
-                            if((b[currentNode[0]-1][currentNode[1]] === 1 || b[currentNode[0]-1][currentNode[1]] === 4)
-                                && (b[currentNode[0]+1][currentNode[1]] === 1 || b[currentNode[0]+1][currentNode[1]] === 4)
-                                && (b[currentNode[0]][currentNode[1]+1] === 1 || b[currentNode[0]][currentNode[1]+1] === 4)
-                                && (b[currentNode[0]][currentNode[1]-1] === 1 || b[currentNode[0]][currentNode[1]-1] === 4)){
+                            if((b[currentNode[0]-1][currentNode[1]] === 1 || b[currentNode[0]-1][currentNode[1]] === 4 || b[currentNode[0]-1][currentNode[1]] === 5 || (b[currentNode[0]-1][currentNode[1]] === 3 && b[currentNode[0]+1][currentNode[1]] === 5))
+                                && (b[currentNode[0]+1][currentNode[1]] === 1 || b[currentNode[0]+1][currentNode[1]] === 4  || b[currentNode[0]+1][currentNode[1]] === 5 || (b[currentNode[0]+1][currentNode[1]] === 3 && b[currentNode[0]-1][currentNode[1]] === 5))
+                                && (b[currentNode[0]][currentNode[1]+1] === 1 || b[currentNode[0]][currentNode[1]+1] === 4  || b[currentNode[0]][currentNode[1]+1] === 5 || (b[currentNode[0]][currentNode[1]+1] === 3 && b[currentNode[0]][currentNode[1]-1] === 5))
+                                && (b[currentNode[0]][currentNode[1]-1] === 1 || b[currentNode[0]][currentNode[1]-1] === 4) || b[currentNode[0]][currentNode[1]-1] === 5 || (b[currentNode[0]][currentNode[1]-1] === 3 && b[currentNode[0]][currentNode[1]+1] === 5)){
                                     failed = true;
                             }
                         } catch(e){};
                         if(failed === true){
-                            alert("Failed");
-                            break;
+                            clearPath(b);
+                            b[currentNode[0]][currentNode[1]] = 5;
+                            currentNode = [start[0], start[1]];
+                            failed = false;
                         }
 
                         if(currentNode[0] >= end[0] && currentNode[1] <= end[1]){
@@ -448,16 +454,18 @@ const findPath = b => {
                         }
 
                         try{
-                            if((b[currentNode[0]-1][currentNode[1]] === 1 || b[currentNode[0]-1][currentNode[1]] === 4)
-                                && (b[currentNode[0]+1][currentNode[1]] === 1 || b[currentNode[0]+1][currentNode[1]] === 4)
-                                && (b[currentNode[0]][currentNode[1]+1] === 1 || b[currentNode[0]][currentNode[1]+1] === 4)
-                                && (b[currentNode[0]][currentNode[1]-1] === 1 || b[currentNode[0]][currentNode[1]-1] === 4)){
+                            if((b[currentNode[0]-1][currentNode[1]] === 1 || b[currentNode[0]-1][currentNode[1]] === 4 || b[currentNode[0]-1][currentNode[1]] === 5 || (b[currentNode[0]-1][currentNode[1]] === 3 && b[currentNode[0]+1][currentNode[1]] === 5))
+                                && (b[currentNode[0]+1][currentNode[1]] === 1 || b[currentNode[0]+1][currentNode[1]] === 4  || b[currentNode[0]+1][currentNode[1]] === 5 || (b[currentNode[0]+1][currentNode[1]] === 3 && b[currentNode[0]-1][currentNode[1]] === 5))
+                                && (b[currentNode[0]][currentNode[1]+1] === 1 || b[currentNode[0]][currentNode[1]+1] === 4  || b[currentNode[0]][currentNode[1]+1] === 5 || (b[currentNode[0]][currentNode[1]+1] === 3 && b[currentNode[0]][currentNode[1]-1] === 5))
+                                && (b[currentNode[0]][currentNode[1]-1] === 1 || b[currentNode[0]][currentNode[1]-1] === 4) || b[currentNode[0]][currentNode[1]-1] === 5 || (b[currentNode[0]][currentNode[1]-1] === 3 && b[currentNode[0]][currentNode[1]+1] === 5)){
                                     failed = true;
                             }
                         } catch(e){};
                         if(failed === true){
-                            alert("Failed");
-                            break;
+                            clearPath(b);
+                            b[currentNode[0]][currentNode[1]] = 5;
+                            currentNode = [start[0], start[1]];
+                            failed = false;
                         }
 
                         if(currentNode[0] >= end[0] && currentNode[1] >= end[1]){
@@ -491,16 +499,18 @@ const findPath = b => {
                         }
 
                         try{
-                            if((b[currentNode[0]-1][currentNode[1]] === 1 || b[currentNode[0]-1][currentNode[1]] === 4)
-                                && (b[currentNode[0]+1][currentNode[1]] === 1 || b[currentNode[0]+1][currentNode[1]] === 4)
-                                && (b[currentNode[0]][currentNode[1]+1] === 1 || b[currentNode[0]][currentNode[1]+1] === 4)
-                                && (b[currentNode[0]][currentNode[1]-1] === 1 || b[currentNode[0]][currentNode[1]-1] === 4)){
+                            if((b[currentNode[0]-1][currentNode[1]] === 1 || b[currentNode[0]-1][currentNode[1]] === 4 || b[currentNode[0]-1][currentNode[1]] === 5 || (b[currentNode[0]-1][currentNode[1]] === 3 && b[currentNode[0]+1][currentNode[1]] === 5))
+                                && (b[currentNode[0]+1][currentNode[1]] === 1 || b[currentNode[0]+1][currentNode[1]] === 4  || b[currentNode[0]+1][currentNode[1]] === 5 || (b[currentNode[0]+1][currentNode[1]] === 3 && b[currentNode[0]-1][currentNode[1]] === 5))
+                                && (b[currentNode[0]][currentNode[1]+1] === 1 || b[currentNode[0]][currentNode[1]+1] === 4  || b[currentNode[0]][currentNode[1]+1] === 5 || (b[currentNode[0]][currentNode[1]+1] === 3 && b[currentNode[0]][currentNode[1]-1] === 5))
+                                && (b[currentNode[0]][currentNode[1]-1] === 1 || b[currentNode[0]][currentNode[1]-1] === 4) || b[currentNode[0]][currentNode[1]-1] === 5 || (b[currentNode[0]][currentNode[1]-1] === 3 && b[currentNode[0]][currentNode[1]+1] === 5)){
                                     failed = true;
                             }
                         } catch(e){};
                         if(failed === true){
-                            alert("Failed");
-                            break;
+                            clearPath(b);
+                            b[currentNode[0]][currentNode[1]] = 5;
+                            currentNode = [start[0], start[1]];
+                            failed = false;
                         }
 
                         if(currentNode[0] <= end[0] && currentNode[1] <= end[1]){

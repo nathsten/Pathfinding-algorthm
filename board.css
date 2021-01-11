@@ -77,6 +77,9 @@ body{
 .path{
     background-color: blue;
 }
+.blackListed{
+    background-color: black;
+}
 
 .infoDiv{
     position: absolute;

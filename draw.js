@@ -67,6 +67,9 @@ const drawBoard = b => {
             if(b[i][j] === 4){
                 n.classList.add("path");
             }
+            if(b[i][j] === 5){
+                n.classList.add("blackListed");
+            }
             boardDiv.append(n);
         }
     }
@@ -193,3 +196,17 @@ $("reset").addEventListener("click", () => {
     endPoint = false;
     startPoint = false;
 })
+
+/**
+ * @param {number[][]} b
+ */
+const clearPath = b => {
+    for(let i=0; i<b.length; i++){
+        for(let j=0; j<b[i].length; j++){
+            if(b[i][j] === 4){
+                b[i][j] = 0;
+            }
+        }
+        drawBoard(b);
+    }
+}
