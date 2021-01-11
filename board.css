@@ -8,7 +8,7 @@ body{
     top: 1%;
     left: 1%;
     width: 250px;
-    height: 450px;
+    height: 500px;
     border: solid 1px black;
 }
 .headerMenu{
@@ -49,8 +49,12 @@ body{
     100%{opacity: 1;}
 }
 #reset{
+    top: 70px;
+    left: calc(50% - 60px);
+}
+#resetPath{
     top: 50px;
-    left: calc(-50% + 65px);
+    left: calc(-50% + 66px);
 }
 
 .boardMain{

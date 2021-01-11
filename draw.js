@@ -186,17 +186,6 @@ n => {
     }
 });
 
-$("reset").addEventListener("click", () => {
-    for(let i=0; i<board.length; i++){
-        for(let j=0; j<board[i].length; j++){
-            board[i][j] = 0;
-        }
-        drawBoard(board);
-    }
-    endPoint = false;
-    startPoint = false;
-})
-
 /**
  * @param {number[][]} b
  */
@@ -210,3 +199,30 @@ const clearPath = b => {
         drawBoard(b);
     }
 }
+
+/**
+ * @param {number[][]} b
+ */
+const resetPath = b => {
+    for(let i=0; i<b.length; i++){
+        for(let j=0; j<b[i].length; j++){
+            if(b[i][j] === 4 || b[i][j] === 5){
+                b[i][j] = 0;
+            }
+        }
+        drawBoard(b);
+    }
+}
+
+$("reset").addEventListener("click", () => {
+    for(let i=0; i<board.length; i++){
+        for(let j=0; j<board[i].length; j++){
+            board[i][j] = 0;
+        }
+        drawBoard(board);
+    }
+    endPoint = false;
+    startPoint = false;
+})
+
+$("resetPath").addEventListener("click", () => resetPath(board));
